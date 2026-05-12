@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Taxi Express Alhaurín el Grande. Reserva tu taxi rápido y seguro en Málaga. Traslados al aeropuerto, estación, puerto y centro." />
+  <title>Taxi Express Alhaurín el Grande</title>
+
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --text: #263238;
+      --muted: #64748b;
+      --black: #111111;
+      --yellow: #ffc107;
+      --yellow-hover: #ffb000;
+      --white: #ffffff;
+      --green: #25d366;
+      --green-hover: #1ebc59;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      --shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+      --shadow-hover: 0 16px 35px rgba(15, 23, 42, 0.14);
+      --radius: 18px;
+      --max: 1120px;
+      --font: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font);
+      line-height: 1.6;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    .container {
+      width: min(92%, var(--max));
+      margin: 0 auto;
+    }
+
+    .header {
+      background:
+        linear-gradient(rgba(0, 0, 0, 0.76), rgba(0, 0, 0, 0.76)),
+        radial-gradient(circle at top right, rgba(255, 193, 7, 0.22), transparent 35%),
+        #050505;
+      color: var(--white);
+      text-align: center;
+      padding: 4.5rem 0 3.2rem;
+      position: relative;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.22);
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: clamp(2.1rem, 5vw, 3.6rem);
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1.08;
+    }
+
+    .header h1 span {
+      color: var(--yellow);
+    }
+
+    .header p {
+      margin: 1rem auto 2rem;
+      color: #d8dee7;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      max-width: 650px;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .navbar a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.98rem;
+      padding: 0.65rem 1rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: 0.2s ease;
+    }
+
+    .navbar a:hover {
+      color: var(--black);
+      background: var(--yellow);
+      border-color: var(--yellow);
+      transform: translateY(-2px);
+    }
+
+    .language-switch {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+
+    .lang-btn {
+      background: rgba(255, 255, 255, 0.12);
+      border: 2px solid transparent;
+      padding: 4px;
+      cursor: pointer;
+      border-radius: 10px;
+      transition: 0.2s ease;
+    }
+
+    .lang-btn:hover,
+    .lang-btn.active {
+      transform: translateY(-2px);
+      border-color: var(--yellow);
+      background: rgba(255, 255, 255, 0.24);
+    }
+
+    .lang-btn img {
+      display: block;
+      width: 30px;
+      height: 21px;
+      border-radius: 5px;
+      object-fit: cover;
+    }
+
+    main {
+      padding: 3rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2.3rem;
+    }
+
+    section {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: clamp(1.35rem, 3vw, 2.2rem);
+      border: 1px solid var(--border);
+    }
+
+    section h2 {
+      margin-top: 0;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      color: var(--black);
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 12px;
+      letter-spacing: -0.4px;
+    }
+
+    section h2::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 56px;
+      height: 4px;
+      background: var(--yellow);
+      border-radius: 20px;
+    }
+
+    .reserva-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .full-width {
+      grid-column: 1 / -1;
+    }
+
+    .reserva-form label {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #475569;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    .reserva-form input,
+    .reserva-form select {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1rem;
+      border-radius: 12px;
+      border: 1px solid #cbd5e1;
+      outline: none;
+      background: #f8fafc;
+      font-family: inherit;
+      transition: 0.2s ease;
+      color: var(--text);
+    }
+
+    .reserva-form input:focus,
+    .reserva-form select:focus {
+      border-color: var(--yellow);
+      background: var(--white);
+      box-shadow: 0 0 0 4px rgba(255, 193, 7, 0.18);
+    }
+
+    .date-time-grid {
+      display: none;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .date-time-grid.visible {
+      display: grid;
+    }
+
+    .btn-submit {
+      background: var(--yellow);
+      color: var(--black);
+      border: none;
+      cursor: pointer;
+      font-weight: 900;
+      font-size: 1.08rem;
+      padding: 1.05rem;
+      border-radius: 13px;
+      transition: 0.2s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-submit:hover {
+      background: var(--yellow-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px rgba(255, 193, 7, 0.32);
+    }
+
+    .imagenes {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.35rem;
+    }
+
+    .galeria-card {
+      margin: 0;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+      transition: 0.25s ease;
+      border: 1px solid var(--border);
+    }
+
+    .galeria-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .galeria-card img {
+      width: 100%;
+      height: 205px;
+      object-fit: cover;
+      display: block;
+      background: #f1f5f9;
+      transition: 0.35s ease;
+    }
+
+    .galeria-card:hover img {
+      transform: scale(1.045);
+    }
+
+    .galeria-card figcaption {
+      padding: 1rem;
+      font-weight: 800;
+      font-size: 0.95rem;
+      text-align: center;
+      background: #fff;
+      color: #0f172a;
+      min-height: 58px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .tarifas-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .tarifa-item {
+      padding: 1.5rem;
+      background: #f8fafc;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      font-weight: 800;
+      text-align: center;
+      font-size: 1.08rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .tarifa-item span {
+      color: #d99000;
+      font-size: 1.45rem;
+      font-weight: 900;
+    }
+
+    .carousel-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .opiniones-carousel {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding: 8px 4px 18px;
+      flex: 1;
+      scrollbar-width: none;
+    }
+
+    .opiniones-carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .opinion-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 1.35rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      min-width: 300px;
+      max-width: 325px;
+      scroll-snap-align: center;
+      flex: 0 0 auto;
+    }
+
+    .opinion-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .opinion-card img {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #fff;
+      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.12);
+    }
+
+    .opinion-card h3 {
+      margin: 0;
+      font-size: 1.06rem;
+      color: #0f172a;
+    }
+
+    .opinion-card p {
+      margin: 0;
+      font-style: italic;
+      color: #475569;
+    }
+
+    .stars {
+      color: #f5b301;
+      font-size: 1.05rem;
+      letter-spacing: 1px;
+    }
+
+    .carousel-btn {
+      background: var(--black);
+      color: var(--yellow);
+      border: none;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: 0.2s ease;
+      z-index: 2;
+      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.2);
+    }
+
+    .carousel-btn:hover {
+      transform: scale(1.08);
+      background: #2b2b2b;
+    }
+
+    .map-frame {
+      width: 100%;
+      height: 410px;
+      border: 0;
+      border-radius: 14px;
+      background: #e5e7eb;
+    }
+
+    footer {
+      background: var(--black);
+      color: #cbd5e1;
+      text-align: center;
+      padding: 2.2rem 1rem;
+    }
+
+    footer p {
+      margin: 0.4rem 0;
+    }
+
+    footer strong {
+      color: var(--white);
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 99;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--green);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 0.85rem 1.35rem;
+      box-shadow: 0 12px 22px rgba(37, 211, 102, 0.34);
+      font-weight: 900;
+      transition: 0.25s ease;
+    }
+
+    .whatsapp-float:hover {
+      background: var(--green-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 28px rgba(37, 211, 102, 0.44);
+    }
+
+    .wa-icon {
+      font-size: 1.45rem;
+      line-height: 1;
+    }
+
+    /* ==============================
+       NUEVA FUNCIONALIDAD: campo de forma de pago + botón de información
+       ============================== */
+    .payment-field-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .payment-field-header label {
+      margin-bottom: 0;
+    }
+
+    .payment-info-btn {
+      border: 1px solid rgba(255, 193, 7, 0.55);
+      background: rgba(255, 193, 7, 0.14);
+      color: var(--black);
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 900;
+      border-radius: 999px;
+      padding: 0.45rem 0.75rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .payment-info-btn:hover,
+    .payment-info-btn:focus-visible {
+      background: var(--yellow);
+      border-color: var(--yellow);
+      transform: translateY(-2px);
+      outline: none;
+      box-shadow: 0 8px 18px rgba(255, 193, 7, 0.25);
+    }
+
+    /* ==============================
+       NUEVA FUNCIONALIDAD: modal informativo de pagos
+       ============================== */
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    .payment-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 150;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+    }
+
+    .payment-modal.is-open {
+      display: flex;
+    }
+
+    .payment-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.66);
+      backdrop-filter: blur(4px);
+    }
+
+    .payment-modal-card {
+      position: relative;
+      width: min(100%, 560px);
+      background:
+        radial-gradient(circle at top right, rgba(255, 193, 7, 0.18), transparent 34%),
+        var(--white);
+      border-radius: 22px;
+      border: 1px solid rgba(226, 232, 240, 0.95);
+      box-shadow: 0 24px 70px rgba(2, 6, 23, 0.35);
+      padding: clamp(1.25rem, 3vw, 1.8rem);
+      transform: translateY(8px);
+      animation: modalIn 0.22s ease forwards;
+    }
+
+    @keyframes modalIn {
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    .payment-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .payment-modal-header h3 {
+      margin: 0;
+      color: var(--black);
+      font-size: clamp(1.35rem, 3vw, 1.75rem);
+      line-height: 1.15;
+      letter-spacing: -0.3px;
+    }
+
+    .payment-modal-close {
+      width: 42px;
+      height: 42px;
+      min-width: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      color: var(--black);
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .payment-modal-close:hover,
+    .payment-modal-close:focus-visible {
+      background: var(--black);
+      color: var(--yellow);
+      outline: none;
+      transform: rotate(6deg) scale(1.04);
+    }
+
+    .payment-modal-lead {
+      margin: 0 0 1.2rem;
+      color: #475569;
+      font-size: 1rem;
+    }
+
+    .payment-modal-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .payment-modal-list li {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.85rem;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1rem;
+    }
+
+    .payment-modal-list strong {
+      display: block;
+      color: #0f172a;
+      font-size: 1.02rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .payment-modal-list p {
+      margin: 0;
+      color: #64748b;
+      line-height: 1.45;
+    }
+
+    .payment-modal-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: var(--yellow);
+      color: var(--black);
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.35rem;
+      box-shadow: 0 6px 14px rgba(255, 193, 7, 0.22);
+    }
+
+    .payment-modal-action {
+      width: 100%;
+      margin-top: 1.2rem;
+      border: none;
+      background: var(--black);
+      color: var(--yellow);
+      border-radius: 14px;
+      padding: 0.95rem 1rem;
+      font-family: inherit;
+      font-weight: 900;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .payment-modal-action:hover,
+    .payment-modal-action:focus-visible {
+      transform: translateY(-2px);
+      background: #2b2b2b;
+      outline: none;
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.22);
+    }
+
+    /* ==============================
+       NUEVA FUNCIONALIDAD: botón flotante de teléfono
+       ============================== */
+    .phone-float {
+      position: fixed;
+      right: 24px;
+      bottom: 92px;
+      z-index: 99;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--yellow);
+      color: var(--black);
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 0.85rem 1.35rem;
+      box-shadow: 0 12px 22px rgba(255, 193, 7, 0.32);
+      font-weight: 900;
+      transition: 0.25s ease;
+      border: 1px solid rgba(17, 17, 17, 0.08);
+    }
+
+    .phone-float:hover {
+      background: var(--yellow-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 28px rgba(255, 193, 7, 0.44);
+    }
+
+    .phone-icon {
+      font-size: 1.35rem;
+      line-height: 1;
+    }
+
+    @media (max-width: 980px) {
+      .imagenes {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .tarifas-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        padding: 5.2rem 0 2.4rem;
+      }
+
+      .reserva-form,
+      .date-time-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .language-switch {
+        top: 14px;
+        right: 14px;
+      }
+
+      .carousel-btn {
+        display: none;
+      }
+
+      .whatsapp-float span:last-child {
+        display: none;
+      }
+
+      .whatsapp-float {
+        padding: 1rem;
+        right: 16px;
+        bottom: 16px;
+        border-radius: 50%;
+      }
+
+      .phone-float span:last-child {
+        display: none;
+      }
+
+      .phone-float {
+        padding: 1rem;
+        right: 16px;
+        bottom: 82px;
+        border-radius: 50%;
+      }
+
+      .payment-field-header {
+        align-items: flex-start;
+      }
+
+      .payment-info-btn {
+        padding: 0.42rem 0.68rem;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .imagenes {
+        grid-template-columns: 1fr;
+      }
+
+      .galeria-card img {
+        height: 220px;
+      }
+
+      section {
+        border-radius: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <div class="language-switch" aria-label="Selector de idioma">
+      <button class="lang-btn active" data-lang="es" aria-label="Español">
+        <img src="https://flagcdn.com/w40/es.png" alt="Español" />
+      </button>
+      <button class="lang-btn" data-lang="en" aria-label="English">
+        <img src="https://flagcdn.com/w40/gb.png" alt="English" />
+      </button>
+      <button class="lang-btn" data-lang="de" aria-label="Deutsch">
+        <img src="https://flagcdn.com/w40/de.png" alt="Deutsch" />
+      </button>
+    </div>
+
+    <div class="container">
+      <h1 id="siteTitle">Taxi Express <span>Alhaurín</span></h1>
+      <p id="siteSubtitle">Tu traslado rápido, cómodo y seguro en Málaga</p>
+
+      <nav class="navbar" aria-label="Navegación principal">
+        <a href="#reservar" id="navReservar">Reservar</a>
+        <a href="#galeria" id="navGaleria">Servicios</a>
+        <a href="#tarifas" id="navTarifas">Tarifas</a>
+        <a href="#ubicacion" id="navUbicacion">Zona</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="reservar">
+      <h2 id="reservarTitle">Solicita tu taxi ahora</h2>
+
+      <form id="reservaForm" class="reserva-form">
+        <div>
+          <label for="nombre" id="lblNombre">Nombre completo</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Ej. María García" autocomplete="name" required />
+        </div>
+
+        <div>
+          <label for="telefono" id="lblTelefono">Teléfono</label>
+          <input type="tel" id="telefono" name="telefono" placeholder="Ej. +34 600 000 000" autocomplete="tel" inputmode="tel" required />
+        </div>
+
+        <div>
+          <label for="origen" id="lblOrigen">Punto de recogida</label>
+          <input type="text" id="origen" name="origen" placeholder="Dirección, aeropuerto, hotel..." autocomplete="street-address" required />
+        </div>
+
+        <div>
+          <label for="destino" id="lblDestino">Destino</label>
+          <input type="text" id="destino" name="destino" placeholder="Dirección de destino" required />
+        </div>
+
+        <div class="full-width">
+          <label for="tipo" id="lblTipo">Tipo de vehículo</label>
+          <select id="tipo" name="tipo"></select>
+        </div>
+
+        <!-- NUEVA FUNCIONALIDAD: campo de forma de pago + botón de información -->
+        <div class="full-width payment-field">
+          <div class="payment-field-header">
+            <label for="formaPago" id="lblFormaPago">Forma de pago</label>
+            <button
+              type="button"
+              id="paymentInfoBtn"
+              class="payment-info-btn"
+              aria-haspopup="dialog"
+              aria-controls="paymentModal"
+              aria-label="Ver información sobre formas de pago">
+              <span id="paymentInfoBtnText">Info pagos</span>
+              <span aria-hidden="true">ℹ️</span>
+            </button>
+          </div>
+          <select id="formaPago" name="formaPago" required></select>
+        </div>
+
+        <div class="full-width">
+          <label for="fechaHoraToggle" id="lblCuando">¿Cuándo necesitas el taxi?</label>
+          <select id="fechaHoraToggle" name="fechaHoraToggle">
+            <option value="no" id="optInmediato">Recogida inmediata</option>
+            <option value="si" id="optProgramada">Reserva programada</option>
+          </select>
+        </div>
+
+        <div id="fechaHoraFields" class="full-width date-time-grid">
+          <div>
+            <label for="fecha" id="lblFecha">Fecha</label>
+            <input type="date" id="fecha" name="fecha" />
+          </div>
+
+          <div>
+            <label for="hora" id="lblHora">Hora</label>
+            <input type="time" id="hora" name="hora" />
+          </div>
+        </div>
+
+        <button type="submit" id="btnWhatsApp" class="full-width btn-submit">
+          <span id="btnText">Reservar por WhatsApp</span>
+          <span aria-hidden="true">📱</span>
+        </button>
+      </form>
+    </section>
+
+<section id="galeria">
+  <h2 id="galeriaTitle">Nuestros Servicios</h2>
+
+  <div class="imagenes">
+    <figure class="galeria-card">
+      <img
+        id="img1"
+        src="img/aeropuerto.jpg"
+        alt="Aeropuerto de Málaga"
+        loading="lazy"
+      />
+      <figcaption id="cap1">Traslados Aeropuerto (AGP)</figcaption>
+    </figure>
+
+    <figure class="galeria-card">
+      <img
+        id="img2"
+        src="img/tren.jpg"
+        alt="Estación de tren AVE"
+        loading="lazy"
+      />
+      <figcaption id="cap2">Estación de Tren (AVE)</figcaption>
+    </figure>
+
+    <figure class="galeria-card">
+      <img
+        id="img3"
+        src="img/puerto.jpg"
+        alt="Puerto de Málaga"
+        loading="lazy"
+      />
+      <figcaption id="cap3">Puerto y Muelle Uno</figcaption>
+    </figure>
+
+    <figure class="galeria-card">
+      <img
+        id="img4"
+        src="img/taxi-malaga.jpg"
+        alt="Taxi Oficial de Málaga"
+        loading="lazy"
+      />
+      <figcaption id="cap4">Taxi Oficial de Málaga</figcaption>
+    </figure>
+  </div>
+</section>
+
+    <section id="tarifas">
+      <h2 id="tarifasTitle">Tarifas Destacadas</h2>
+      <div class="tarifas-list" id="tarifasContainer"></div>
+    </section>
+
+    <section id="opiniones">
+      <h2 id="opinionesTitle">Lo que dicen nuestros clientes</h2>
+
+      <div class="carousel-wrapper">
+        <button class="carousel-btn prev" id="prevBtn" type="button" aria-label="Opinión anterior">&#10094;</button>
+        <div id="opinionesList" class="opiniones-carousel" aria-live="polite"></div>
+        <button class="carousel-btn next" id="nextBtn" type="button" aria-label="Opinión siguiente">&#10095;</button>
+      </div>
+    </section>
+
+    <section id="ubicacion">
+      <h2 id="ubicacionTitle">Zona de Cobertura</h2>
+      <iframe
+        class="map-frame"
+        title="Mapa de Alhaurín el Grande"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3150.3288485641787!2d-4.674432084682115!3d36.69476097996071!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd72f7e2a58c5fbf%3A0xa12db23e9a44c94e!2sAlhaur%C3%ADn%20el%20Grande%2C%20M%C3%A1laga%2C%20Espa%C3%B1a!5e0!3m2!1ses!2ses!4v1680000000000!5m2!1ses!2ses"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </section>
+  </main>
+
+  <footer id="contacto">
+    <p id="footerContact">📍 Málaga, Andalucía | 📞 <strong>609 150 112</strong> | ✉️ contacto@taxialhaurin.es</p>
+    <p id="footerCopy">© 2026 Taxi Express Alhaurín el Grande. Todos los derechos reservados.</p>
+  </footer>
+
+  <a id="whatsappFloat" class="whatsapp-float" href="https://wa.me/34609150112" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
+    <span class="wa-icon">💬</span>
+    <span id="waFloatText">Asistencia 24h</span>
+  </a>
+
+  <!-- NUEVA FUNCIONALIDAD: botón flotante de teléfono independiente del WhatsApp -->
+  <a id="phoneFloat" class="phone-float" href="tel:+34609150112" aria-label="Llamar a Taxi Express">
+    <span class="phone-icon" aria-hidden="true">📞</span>
+    <span id="phoneFloatText">Llamar ahora</span>
+  </a>
+
+  <!-- NUEVA FUNCIONALIDAD: modal informativo de formas de pago -->
+  <div id="paymentModal" class="payment-modal" role="dialog" aria-modal="true" aria-labelledby="paymentModalTitle" aria-hidden="true">
+    <div class="payment-modal-backdrop" data-modal-close></div>
+
+    <div class="payment-modal-card" role="document" tabindex="-1">
+      <div class="payment-modal-header">
+        <h3 id="paymentModalTitle">Formas de pago</h3>
+        <button type="button" id="paymentModalClose" class="payment-modal-close" aria-label="Cerrar">×</button>
+      </div>
+
+      <p id="paymentModalLead" class="payment-modal-lead">Puedes elegir la forma de pago que prefieras para tu trayecto.</p>
+      <ul id="paymentModalList" class="payment-modal-list"></ul>
+      <button type="button" id="paymentModalAction" class="payment-modal-action">Entendido</button>
+    </div>
+  </div>
+
+  <script>
+    const WHATSAPP_NUMBER = "34609150112";
+
+    // NUEVA FUNCIONALIDAD: número usado por el botón flotante de teléfono
+    const PHONE_NUMBER_TEL = "+34609150112";
+
+    let currentLang = "es";
+    let lastFocusedElement = null;
+
+    const texts = {
+      es: {
+        siteTitle: "Taxi Express <span>Alhaurín</span>",
+        siteSubtitle: "Tu traslado rápido, cómodo y seguro en Málaga",
+        navReservar: "Reservar",
+        navGaleria: "Servicios",
+        navTarifas: "Tarifas",
+        navUbicacion: "Zona",
+        reservarTitle: "Solicita tu taxi ahora",
+        galeriaTitle: "Nuestros Servicios",
+        tarifasTitle: "Tarifas Destacadas",
+        opinionesTitle: "Lo que dicen nuestros clientes",
+        ubicacionTitle: "Zona de Cobertura",
+        waFloatText: "Asistencia 24h",
+        phoneFloatText: "Llamar ahora",
+        phoneFloatAria: "Llamar a Taxi Express",
+        paymentInfoAria: "Ver información sobre formas de pago",
+        footerCopy: "© 2026 Taxi Express Alhaurín el Grande. Todos los derechos reservados.",
+        captions: [
+          "Traslados Aeropuerto (AGP)",
+          "Estación de Tren (AVE)",
+          "Puerto y Muelle Uno",
+          "Taxi Oficial de Málaga"
+        ],
+        placeholders: {
+          nombre: "Ej. María García",
+          telefono: "Ej. +34 600 000 000",
+          origen: "Dirección, aeropuerto, hotel...",
+          destino: "Dirección de destino"
+        },
+        form: {
+          lblNombre: "Nombre completo",
+          lblTelefono: "Teléfono",
+          lblOrigen: "Punto de recogida",
+          lblDestino: "Destino",
+          lblTipo: "Tipo de vehículo",
+          lblFormaPago: "Forma de pago",
+          paymentInfoBtnText: "Info pagos",
+          lblCuando: "¿Cuándo necesitas el taxi?",
+          optInmediato: "Recogida inmediata (lo antes posible)",
+          optProgramada: "Reserva programada (elegir fecha y hora)",
+          lblFecha: "Fecha",
+          lblHora: "Hora",
+          btnText: "Reservar por WhatsApp"
+        },
+        vehicles: [
+          { value: "estandar", text: "Taxi Estándar (hasta 4 pasajeros)" },
+          { value: "premium", text: "Taxi Premium / VIP" },
+          { value: "van", text: "Minivan (hasta 7 pasajeros)" }
+        ],
+        payments: [
+          { value: "efectivo", text: "Efectivo" },
+          { value: "tarjeta", text: "Tarjeta bancaria" },
+          { value: "bizum", text: "Bizum" }
+        ],
+        paymentModal: {
+          title: "Formas de pago",
+          lead: "Puedes elegir la forma de pago que prefieras para tu trayecto.",
+          closeLabel: "Cerrar",
+          actionText: "Entendido",
+          items: [
+            {
+              icon: "💶",
+              title: "Efectivo",
+              description: "Pago directo al conductor al finalizar el servicio."
+            },
+            {
+              icon: "💳",
+              title: "Tarjeta bancaria",
+              description: "Pago cómodo con tarjeta bancaria en el taxi."
+            },
+            {
+              icon: "📲",
+              title: "Bizum",
+              description: "Pago rápido por Bizum con el número acordado."
+            }
+          ]
+        },
+        tarifas: [
+          { route: "Centro ciudad", price: "desde 5€" },
+          { route: "Aeropuerto (AGP)", price: "desde 35€" },
+          { route: "Viajes interurbanos", price: "Consultar" }
+        ],
+        opiniones: [
+          { name: "Emily R.", text: "As a tourist, it was a pleasure. The driver speaks perfect English and made the journey very comfortable.", avatar: "47" },
+          { name: "Carlos M.", text: "Servicio impecable y muy puntual. El coche estaba limpio y el trato fue excelente.", avatar: "11" },
+          { name: "Laura G.", text: "Conductor muy amable. Me ayudó con las maletas desde la estación. Repetiré seguro.", avatar: "5" },
+          { name: "Thomas B.", text: "Sehr professionell. Der Fahrer war pünktlich am Flughafen und half mit dem Gepäck.", avatar: "12" },
+          { name: "Javier P.", text: "Pedí un taxi urgente de madrugada y llegaron rápido. Muy buen servicio.", avatar: "33" },
+          { name: "Sarah W.", text: "Great driving and very safe. The van was perfect for our family of six.", avatar: "44" }
+        ],
+        wa: {
+          reserveIntro: "Hola, me gustaría reservar un taxi.",
+          fechaAlerta: "Por favor, selecciona una fecha y hora válidas para tu reserva.",
+          fechaPasada: "La fecha y hora seleccionadas no pueden estar en el pasado.",
+          labels: {
+            nombre: "👤 Nombre",
+            telefono: "📞 Teléfono",
+            origen: "📍 Origen",
+            destino: "🏁 Destino",
+            tipo: "🚕 Vehículo",
+            pago: "💳 Forma de pago",
+            fecha: "📅 Fecha",
+            hora: "⏰ Hora",
+            inmediata: "⚡ Recogida inmediata"
+          }
+        }
+      },
+
+      en: {
+        siteTitle: "Express Taxi <span>Alhaurín</span>",
+        siteSubtitle: "Your fast, comfortable and safe transfer in Malaga",
+        navReservar: "Book",
+        navGaleria: "Services",
+        navTarifas: "Rates",
+        navUbicacion: "Area",
+        reservarTitle: "Request your taxi now",
+        galeriaTitle: "Our Services",
+        tarifasTitle: "Popular Rates",
+        opinionesTitle: "What our clients say",
+        ubicacionTitle: "Service Area",
+        waFloatText: "24/7 Support",
+        phoneFloatText: "Call now",
+        phoneFloatAria: "Call Taxi Express",
+        paymentInfoAria: "View payment method information",
+        footerCopy: "© 2026 Taxi Express Alhaurín el Grande. All rights reserved.",
+        captions: [
+          "Airport Transfers (AGP)",
+          "Train Station (AVE)",
+          "Port and Muelle Uno",
+          "Official Malaga Taxi"
+        ],
+        placeholders: {
+          nombre: "Example: Mary Smith",
+          telefono: "Example: +34 600 000 000",
+          origen: "Address, airport, hotel...",
+          destino: "Destination address"
+        },
+        form: {
+          lblNombre: "Full name",
+          lblTelefono: "Phone",
+          lblOrigen: "Pick-up point",
+          lblDestino: "Destination",
+          lblTipo: "Vehicle type",
+          lblFormaPago: "Payment method",
+          paymentInfoBtnText: "Payment info",
+          lblCuando: "When do you need the taxi?",
+          optInmediato: "Immediate pick-up (as soon as possible)",
+          optProgramada: "Scheduled booking (choose date and time)",
+          lblFecha: "Date",
+          lblHora: "Time",
+          btnText: "Book via WhatsApp"
+        },
+        vehicles: [
+          { value: "estandar", text: "Standard Taxi (up to 4 passengers)" },
+          { value: "premium", text: "Premium / VIP Taxi" },
+          { value: "van", text: "Minivan (up to 7 passengers)" }
+        ],
+        payments: [
+          { value: "efectivo", text: "Cash" },
+          { value: "tarjeta", text: "Bank card" },
+          { value: "bizum", text: "Bizum" }
+        ],
+        paymentModal: {
+          title: "Payment methods",
+          lead: "Choose the payment method that works best for your journey.",
+          closeLabel: "Close",
+          actionText: "Got it",
+          items: [
+            {
+              icon: "💶",
+              title: "Cash",
+              description: "Pay the driver directly at the end of the service."
+            },
+            {
+              icon: "💳",
+              title: "Bank card",
+              description: "Pay conveniently by bank card in the taxi."
+            },
+            {
+              icon: "📲",
+              title: "Bizum",
+              description: "Make a quick Bizum payment using the agreed number."
+            }
+          ]
+        },
+        tarifas: [
+          { route: "City center", price: "from 5€" },
+          { route: "Airport (AGP)", price: "from 35€" },
+          { route: "Intercity trips", price: "Ask us" }
+        ],
+        opiniones: [
+          { name: "Emily R.", text: "As a tourist, it was a pleasure. The driver speaks perfect English and made the journey very comfortable.", avatar: "47" },
+          { name: "Carlos M.", text: "Excellent and very punctual service. The car was clean and the treatment was great.", avatar: "11" },
+          { name: "Laura G.", text: "Very friendly driver. Helped me with my luggage at the station. I will book again.", avatar: "5" },
+          { name: "Thomas B.", text: "Sehr professionell. Der Fahrer war pünktlich am Flughafen und half mit dem Gepäck.", avatar: "12" },
+          { name: "Javier P.", text: "I requested an urgent taxi late at night and they arrived quickly. Great service.", avatar: "33" },
+          { name: "Sarah W.", text: "Great driving and very safe. The van was perfect for our family of six.", avatar: "44" }
+        ],
+        wa: {
+          reserveIntro: "Hello, I would like to book a taxi.",
+          fechaAlerta: "Please select a valid date and time for your booking.",
+          fechaPasada: "The selected date and time cannot be in the past.",
+          labels: {
+            nombre: "👤 Name",
+            telefono: "📞 Phone",
+            origen: "📍 Pick-up",
+            destino: "🏁 Destination",
+            tipo: "🚕 Vehicle",
+            pago: "💳 Payment method",
+            fecha: "📅 Date",
+            hora: "⏰ Time",
+            inmediata: "⚡ Immediate pick-up"
+          }
+        }
+      },
+
+      de: {
+        siteTitle: "Express Taxi <span>Alhaurín</span>",
+        siteSubtitle: "Ihr schneller, komfortabler und sicherer Transfer in Málaga",
+        navReservar: "Buchen",
+        navGaleria: "Dienste",
+        navTarifas: "Preise",
+        navUbicacion: "Gebiet",
+        reservarTitle: "Fordern Sie jetzt Ihr Taxi an",
+        galeriaTitle: "Unsere Dienstleistungen",
+        tarifasTitle: "Beliebte Tarife",
+        opinionesTitle: "Was unsere Kunden sagen",
+        ubicacionTitle: "Servicebereich",
+        waFloatText: "24/7 Support",
+        phoneFloatText: "Call now",
+        phoneFloatAria: "Call Taxi Express",
+        paymentInfoAria: "View payment method information",
+        footerCopy: "© 2026 Taxi Express Alhaurín el Grande. Alle Rechte vorbehalten.",
+        captions: [
+          "Flughafentransfer (AGP)",
+          "Bahnhof (AVE)",
+          "Hafen & Muelle Uno",
+          "Offizielles Taxi Málaga"
+        ],
+        placeholders: {
+          nombre: "Beispiel: Maria Schmidt",
+          telefono: "Beispiel: +34 600 000 000",
+          origen: "Adresse, Flughafen, Hotel...",
+          destino: "Zieladresse"
+        },
+        form: {
+          lblNombre: "Vollständiger Name",
+          lblTelefono: "Telefon",
+          lblOrigen: "Abholort",
+          lblDestino: "Ziel",
+          lblTipo: "Fahrzeugtyp",
+          lblFormaPago: "Zahlungsart",
+          paymentInfoBtnText: "Zahlungsinfo",
+          lblCuando: "Wann benötigen Sie das Taxi?",
+          optInmediato: "Sofortige Abholung",
+          optProgramada: "Geplante Buchung mit Datum und Uhrzeit",
+          lblFecha: "Datum",
+          lblHora: "Uhrzeit",
+          btnText: "Über WhatsApp buchen"
+        },
+        vehicles: [
+          { value: "estandar", text: "Standard Taxi (bis 4 Personen)" },
+          { value: "premium", text: "Premium / VIP Taxi" },
+          { value: "van", text: "Minivan (bis 7 Personen)" }
+        ],
+        payments: [
+          { value: "efectivo", text: "Barzahlung" },
+          { value: "tarjeta", text: "Bankkarte" },
+          { value: "bizum", text: "Bizum" }
+        ],
+        paymentModal: {
+          title: "Zahlungsmöglichkeiten",
+          lead: "Wählen Sie die Zahlungsart, die für Ihre Fahrt am besten passt.",
+          closeLabel: "Schließen",
+          actionText: "Verstanden",
+          items: [
+            {
+              icon: "💶",
+              title: "Barzahlung",
+              description: "Bezahlen Sie den Fahrer direkt am Ende der Fahrt."
+            },
+            {
+              icon: "💳",
+              title: "Bankkarte",
+              description: "Bezahlen Sie bequem mit Bankkarte im Taxi."
+            },
+            {
+              icon: "📲",
+              title: "Bizum",
+              description: "Schnelle Zahlung per Bizum über die vereinbarte Nummer."
+            }
+          ]
+        },
+        tarifas: [
+          { route: "Stadtzentrum", price: "ab 5€" },
+          { route: "Flughafen (AGP)", price: "ab 35€" },
+          { route: "Überlandfahrten", price: "Anfragen" }
+        ],
+        opiniones: [
+          { name: "Emily R.", text: "As a tourist, it was a pleasure. The driver speaks perfect English and made the journey very comfortable.", avatar: "47" },
+          { name: "Carlos M.", text: "Ausgezeichneter und sehr pünktlicher Service. Das Auto war sauber.", avatar: "11" },
+          { name: "Laura G.", text: "Sehr freundlicher Fahrer. Er half mir mit dem Gepäck am Bahnhof.", avatar: "5" },
+          { name: "Thomas B.", text: "Sehr professionell. Der Fahrer war pünktlich am Flughafen und half mit dem Gepäck.", avatar: "12" },
+          { name: "Javier P.", text: "Ich brauchte nachts dringend ein Taxi und es kam schnell. Sehr guter Service.", avatar: "33" },
+          { name: "Sarah W.", text: "Great driving and very safe. The van was perfect for our family of six.", avatar: "44" }
+        ],
+        wa: {
+          reserveIntro: "Hallo, ich möchte ein Taxi buchen.",
+          fechaAlerta: "Bitte wählen Sie ein gültiges Datum und eine gültige Uhrzeit.",
+          fechaPasada: "Das ausgewählte Datum und die Uhrzeit dürfen nicht in der Vergangenheit liegen.",
+          labels: {
+            nombre: "👤 Name",
+            telefono: "📞 Telefon",
+            origen: "📍 Abholung",
+            destino: "🏁 Ziel",
+            tipo: "🚕 Fahrzeug",
+            pago: "💳 Zahlungsart",
+            fecha: "📅 Datum",
+            hora: "⏰ Uhrzeit",
+            inmediata: "⚡ Sofortige Abholung"
+          }
+        }
+      }
+    };
+
+    const ids = [
+      "siteTitle", "siteSubtitle", "navReservar", "navGaleria", "navTarifas", "navUbicacion",
+      "reservarTitle", "galeriaTitle", "tarifasTitle", "opinionesTitle", "ubicacionTitle",
+      "waFloatText", "phoneFloatText", "lblNombre", "lblTelefono", "lblOrigen", "lblDestino", "lblTipo",
+      "lblFormaPago", "paymentInfoBtnText", "lblCuando", "optInmediato", "optProgramada", "lblFecha", "lblHora", "btnText",
+      "footerCopy"
+    ];
+
+    function setTodayAsMinimumDate() {
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      const mm = String(today.getMonth() + 1).padStart(2, "0");
+      const dd = String(today.getDate()).padStart(2, "0");
+      document.getElementById("fecha").min = `${yyyy}-${mm}-${dd}`;
+    }
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      const t = texts[lang];
+
+      ids.forEach(id => {
+        const element = document.getElementById(id);
+        if (!element) return;
+
+        if (id === "siteTitle") {
+          element.innerHTML = t.siteTitle;
+        } else if (t[id]) {
+          element.textContent = t[id];
+        } else if (t.form && t.form[id]) {
+          element.textContent = t.form[id];
+        }
+      });
+
+      document.documentElement.lang = lang;
+
+      document.getElementById("nombre").placeholder = t.placeholders.nombre;
+      document.getElementById("telefono").placeholder = t.placeholders.telefono;
+      document.getElementById("origen").placeholder = t.placeholders.origen;
+      document.getElementById("destino").placeholder = t.placeholders.destino;
+
+      document.getElementById("cap1").textContent = t.captions[0];
+      document.getElementById("cap2").textContent = t.captions[1];
+      document.getElementById("cap3").textContent = t.captions[2];
+      document.getElementById("cap4").textContent = t.captions[3];
+
+      document.getElementById("phoneFloat").href = `tel:${PHONE_NUMBER_TEL}`;
+      document.getElementById("phoneFloat").setAttribute("aria-label", t.phoneFloatAria);
+      document.getElementById("paymentInfoBtn").setAttribute("aria-label", t.paymentInfoAria);
+
+      renderVehicles(t.vehicles);
+
+      // NUEVA FUNCIONALIDAD: traducción y renderizado del campo/modal de pagos
+      renderPaymentMethods(t.payments);
+      renderPaymentModal(t.paymentModal);
+
+      renderTarifas(t.tarifas);
+      renderOpiniones(t.opiniones);
+
+      document.querySelectorAll(".lang-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.lang === lang);
+      });
+    }
+
+    function renderVehicles(vehicles) {
+      const select = document.getElementById("tipo");
+      const selected = select.value || "estandar";
+
+      select.innerHTML = vehicles
+        .map(vehicle => `<option value="${vehicle.value}">${vehicle.text}</option>`)
+        .join("");
+
+      select.value = selected;
+    }
+
+    // NUEVA FUNCIONALIDAD: opciones multilenguaje para el campo de forma de pago
+    function renderPaymentMethods(payments) {
+      const select = document.getElementById("formaPago");
+      const selected = select.value || "efectivo";
+
+      select.innerHTML = payments
+        .map(payment => `<option value="${payment.value}">${payment.text}</option>`)
+        .join("");
+
+      select.value = payments.some(payment => payment.value === selected)
+        ? selected
+        : payments[0].value;
+    }
+
+    // NUEVA FUNCIONALIDAD: contenido multilenguaje del modal de pagos
+    function renderPaymentModal(paymentModal) {
+      document.getElementById("paymentModalTitle").textContent = paymentModal.title;
+      document.getElementById("paymentModalLead").textContent = paymentModal.lead;
+      document.getElementById("paymentModalClose").setAttribute("aria-label", paymentModal.closeLabel);
+      document.getElementById("paymentModalAction").textContent = paymentModal.actionText;
+
+      document.getElementById("paymentModalList").innerHTML = paymentModal.items
+        .map(item => `
+          <li>
+            <span class="payment-modal-icon" aria-hidden="true">${item.icon}</span>
+            <div>
+              <strong>${item.title}</strong>
+              <p>${item.description}</p>
+            </div>
+          </li>
+        `)
+        .join("");
+    }
+
+    function renderTarifas(tarifas) {
+      const tarifasContainer = document.getElementById("tarifasContainer");
+
+      tarifasContainer.innerHTML = tarifas
+        .map(tarifa => `
+          <div class="tarifa-item">
+            ${tarifa.route}
+            <span>${tarifa.price}</span>
+          </div>
+        `)
+        .join("");
+    }
+
+    function renderOpiniones(opiniones) {
+      const opinionesContainer = document.getElementById("opinionesList");
+
+      opinionesContainer.innerHTML = opiniones
+        .map(op => `
+          <article class="opinion-card">
+            <div class="opinion-header">
+              <img src="https://i.pravatar.cc/150?img=${op.avatar}" alt="${op.name}" loading="lazy" />
+              <div>
+                <h3>${op.name}</h3>
+                <div class="stars" aria-label="5 estrellas">★★★★★</div>
+              </div>
+            </div>
+            <p>"${op.text}"</p>
+          </article>
+        `)
+        .join("");
+    }
+
+    function toggleFechaHora() {
+      const fechaHoraToggle = document.getElementById("fechaHoraToggle");
+      const fechaHoraFields = document.getElementById("fechaHoraFields");
+      const inputFecha = document.getElementById("fecha");
+      const inputHora = document.getElementById("hora");
+
+      const isProgramada = fechaHoraToggle.value === "si";
+
+      fechaHoraFields.classList.toggle("visible", isProgramada);
+      inputFecha.required = isProgramada;
+      inputHora.required = isProgramada;
+
+      if (!isProgramada) {
+        inputFecha.value = "";
+        inputHora.value = "";
+      }
+    }
+
+    function isScheduledDateInPast(fecha, hora) {
+      const selectedDate = new Date(`${fecha}T${hora}`);
+      const now = new Date();
+      return selectedDate < now;
+    }
+
+    function handleReservaSubmit(event) {
+      event.preventDefault();
+
+      const t = texts[currentLang].wa;
+
+      const nombre = document.getElementById("nombre").value.trim();
+      const telefono = document.getElementById("telefono").value.trim();
+      const origen = document.getElementById("origen").value.trim();
+      const destino = document.getElementById("destino").value.trim();
+
+      const tipoSelect = document.getElementById("tipo");
+      const tipo = tipoSelect.options[tipoSelect.selectedIndex].text;
+
+      // NUEVA FUNCIONALIDAD: forma de pago incluida en el mensaje de WhatsApp
+      const formaPagoSelect = document.getElementById("formaPago");
+      const formaPago = formaPagoSelect.options[formaPagoSelect.selectedIndex].text;
+
+      const fechaHoraToggle = document.getElementById("fechaHoraToggle");
+      const inputFecha = document.getElementById("fecha");
+      const inputHora = document.getElementById("hora");
+
+      const isProgramada = fechaHoraToggle.value === "si";
+      const fecha = inputFecha.value;
+      const hora = inputHora.value;
+
+      if (isProgramada && (!fecha || !hora)) {
+        alert(t.fechaAlerta);
+        return;
+      }
+
+      if (isProgramada && isScheduledDateInPast(fecha, hora)) {
+        alert(t.fechaPasada);
+        return;
+      }
+
+      let message = `*${t.reserveIntro}*\n\n`;
+      message += `${t.labels.nombre}: ${nombre}\n`;
+      message += `${t.labels.telefono}: ${telefono}\n`;
+      message += `${t.labels.origen}: ${origen}\n`;
+      message += `${t.labels.destino}: ${destino}\n`;
+      message += `${t.labels.tipo}: ${tipo}\n`;
+      message += `${t.labels.pago}: ${formaPago}\n`;
+
+      if (isProgramada) {
+        message += `${t.labels.fecha}: ${fecha}\n`;
+        message += `${t.labels.hora}: ${hora}`;
+      } else {
+        message += `${t.labels.inmediata}`;
+      }
+
+      const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    }
+
+    // NUEVA FUNCIONALIDAD: apertura, cierre y accesibilidad básica del modal de pagos
+    function openPaymentModal() {
+      const modal = document.getElementById("paymentModal");
+      const modalCard = modal.querySelector(".payment-modal-card");
+
+      lastFocusedElement = document.activeElement;
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+
+      setTimeout(() => modalCard.focus(), 0);
+    }
+
+    function closePaymentModal() {
+      const modal = document.getElementById("paymentModal");
+
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+
+      if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
+        lastFocusedElement.focus();
+      }
+    }
+
+    function initPaymentModal() {
+      document.getElementById("paymentInfoBtn").addEventListener("click", openPaymentModal);
+      document.getElementById("paymentModalClose").addEventListener("click", closePaymentModal);
+      document.getElementById("paymentModalAction").addEventListener("click", closePaymentModal);
+
+      document.querySelectorAll("[data-modal-close]").forEach(element => {
+        element.addEventListener("click", closePaymentModal);
+      });
+
+      document.addEventListener("keydown", event => {
+        if (event.key === "Escape" && document.getElementById("paymentModal").classList.contains("is-open")) {
+          closePaymentModal();
+        }
+      });
+    }
+
+    function initCarousel() {
+      const carousel = document.getElementById("opinionesList");
+
+      document.getElementById("prevBtn").addEventListener("click", () => {
+        carousel.scrollBy({ left: -335, behavior: "smooth" });
+      });
+
+      document.getElementById("nextBtn").addEventListener("click", () => {
+        carousel.scrollBy({ left: 335, behavior: "smooth" });
+      });
+    }
+
+    function initLanguageButtons() {
+      document.querySelectorAll(".lang-btn").forEach(btn => {
+        btn.addEventListener("click", () => applyLanguage(btn.dataset.lang));
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      setTodayAsMinimumDate();
+      initCarousel();
+      initLanguageButtons();
+      initPaymentModal();
+
+      document.getElementById("fechaHoraToggle").addEventListener("change", toggleFechaHora);
+      document.getElementById("reservaForm").addEventListener("submit", handleReservaSubmit);
+
+      applyLanguage("es");
+    });
+  </script>
+</body>
+</html>
